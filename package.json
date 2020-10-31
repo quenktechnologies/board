@@ -37,7 +37,7 @@
         "uuid": "^8.1.0"
     },
     "devDependencies": {
-        "@quenk/crapaud": "0.0.1",
+        "@quenk/crapaud": "0.0.2",
         "@quenk/dagen": "^1.9.6",
         "@quenk/dagen-commons": "^0.4.1",
         "@quenk/dback-mongodb-testkit": "^1.0.7",
