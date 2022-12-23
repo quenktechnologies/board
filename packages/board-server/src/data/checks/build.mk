@@ -1,7 +1,3 @@
-,:=,
-SPACE:=
-SPACE:=$(SPACE) $(SPACE)
-
 $(BOARD_CHECKS_DIR): $(BOARD_SCHEMA_DIR) \
 	             $(BOARD_TYPES_DIR) \
 	             $(BOARD_VALIDATORS_DIR)
