@@ -7,11 +7,12 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-import {Button} from '@quenk/wml-widgets/lib/control/button'; ;
 import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Alert} from '@quenk/wml-widgets/lib/dialog/alert'; ;
-import {JobPage} from '@board/widgets/lib/page/job'; ;
-import {JobFormApp} from '../'; 
+import {Link} from '@quenk/wml-widgets/lib/content/link'; ;
+import {TopBar} from '@board/widgets/lib/content/top-bar'; ;
+import {JobSummaryPanel} from '@board/widgets/lib/panel/job-summary'; ;
+import {Job} from '@board/types/lib/job'; ;
+import {HeadView} from './common/head'; 
 
 
 //@ts-ignore:6192
@@ -68,53 +69,96 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class PreviewView  implements __wml.View {
+export interface IndexViewContext{jobs : (Job)[]};
+export class IndexView  implements __wml.View {
 
-   constructor(__context: JobFormApp) {
+   constructor(__context: IndexViewContext) {
 
        this.template = (__this:__wml.Registry) => {
 
        
 
-           return __this.node('div', <__wml.Attrs>{}, [
+           return __this.node('html', <__wml.Attrs>{}, [
 
-        __this.widget(new GridLayout({}, [
+        __this.registerView(new HeadView({
+ 
+      'title' : "Jobs For Caribbean Software Developers",
+'noSite' : true ,
+'styles' : [
+
+            "/assets/css/board.css"
+            ]
+     })).render(),
+__this.node('body', <__wml.Attrs>{}, [
+
+        __this.widget(new TopBar({}, [
+
+        
+     ]),<__wml.Attrs>{}),
+__this.widget(new GridLayout({'id': "main"}, [
 
         __this.widget(new Row({}, [
 
         __this.widget(new Column({'span': 8,'offset': 2}, [
 
-        __this.widget(new Alert({'text': "This is a preview, you jos has not been posted yet."}, [
+        __this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        __this.node('p', <__wml.Attrs>{'class': "board-post-job-prompt"}, [
+
+        __document.createTextNode('Need talent for a project? \u000a                  '),
+__this.widget(new Link({'className': "ww-button -error",'href': "/jobs/post",'text': "Post a Job"}, [
 
         
-     ]),<__wml.Attrs>{'text': "This is a preview, you jos has not been posted yet."})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
+     ]),<__wml.Attrs>{'className': "ww-button -error",'href': "/jobs/post",'text': "Post a Job"})
+     ])
      ]),<__wml.Attrs>{})
      ]),<__wml.Attrs>{}),
-__this.widget(new JobPage({wml : { 'id' : "panel"  },'data': __context.values.job.data}, [
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        ...__forIn (__context.jobs, (job , _$$i, _$$all)=> 
+([
+
+        __this.widget(new JobSummaryPanel({'job': job}, [
 
         
-     ]),<__wml.Attrs>{wml : { 'id' : "panel"  },'data': __context.values.job.data}),
-__this.widget(new GridLayout({}, [
+     ]),<__wml.Attrs>{'job': job})
+     ]), 
+()=> ([
 
-        __this.widget(new Row({}, [
+        __this.node('div', <__wml.Attrs>{'class': "board-no-jobs"}, [
 
-        __this.widget(new Column({'span': 8,'offset': 2}, [
-
-        __this.node('div', <__wml.Attrs>{'class': "action-container"}, [
-
-        __this.widget(new Button({'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}, [
+        __this.node('img', <__wml.Attrs>{'src': "/assets/img/sad.svg",'alt': "Sad Face"}, [
 
         
-     ]),<__wml.Attrs>{'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}),
-__this.widget(new Button({wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click}, [
+     ]),
+__this.node('h1', <__wml.Attrs>{}, [
+
+        unsafe ("Sorry, This Job Board Is Empty!")
+     ]),
+__this.node('p', <__wml.Attrs>{}, [
+
+        __document.createTextNode('Jobs posted by recruiters will show up here so check back in a few days.')
+     ]),
+__this.node('p', <__wml.Attrs>{}, [
+
+        __document.createTextNode('Looking for developers?')
+     ]),
+__this.widget(new Link({'className': "ww-button -primary",'text': "Post a Job",'href': "/jobs/post"}, [
 
         
-     ]),<__wml.Attrs>{wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click})
+     ]),<__wml.Attrs>{'className': "ww-button -primary",'text': "Post a Job",'href': "/jobs/post"})
      ])
+     ]))
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
      ]),<__wml.Attrs>{'span': 8,'offset': 2})
      ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{'id': "main"})
+     ])
      ]);
 
        }

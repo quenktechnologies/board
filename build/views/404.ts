@@ -7,11 +7,7 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-import {Button} from '@quenk/wml-widgets/lib/control/button'; ;
-import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Alert} from '@quenk/wml-widgets/lib/dialog/alert'; ;
-import {JobPage} from '@board/widgets/lib/page/job'; ;
-import {JobFormApp} from '../'; 
+import {HeadView} from './common/head'; 
 
 
 //@ts-ignore:6192
@@ -68,53 +64,36 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class PreviewView  implements __wml.View {
+export class NotFoundView  implements __wml.View {
 
-   constructor(__context: JobFormApp) {
+   constructor(__context: object) {
 
        this.template = (__this:__wml.Registry) => {
 
        
 
-           return __this.node('div', <__wml.Attrs>{}, [
+           return __this.node('html', <__wml.Attrs>{}, [
 
-        __this.widget(new GridLayout({}, [
+        __this.registerView(new HeadView({
+ 
+      'title' : "Here does not exist"
+     })).render(),
+__this.node('body', <__wml.Attrs>{}, [
 
-        __this.widget(new Row({}, [
+        __this.node('p', <__wml.Attrs>{}, [
 
-        __this.widget(new Column({'span': 8,'offset': 2}, [
+        __document.createTextNode('The page you requested does not exist (404). We promise to make this fancier someday.')
+     ]),
+__this.node('p', <__wml.Attrs>{}, [
 
-        __this.widget(new Alert({'text': "This is a preview, you jos has not been posted yet."}, [
+        __document.createTextNode('Click '),
+__this.node('a', <__wml.Attrs>{'href': "/"}, [
 
-        
-     ]),<__wml.Attrs>{'text': "This is a preview, you jos has not been posted yet."})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
-     ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{}),
-__this.widget(new JobPage({wml : { 'id' : "panel"  },'data': __context.values.job.data}, [
-
-        
-     ]),<__wml.Attrs>{wml : { 'id' : "panel"  },'data': __context.values.job.data}),
-__this.widget(new GridLayout({}, [
-
-        __this.widget(new Row({}, [
-
-        __this.widget(new Column({'span': 8,'offset': 2}, [
-
-        __this.node('div', <__wml.Attrs>{'class': "action-container"}, [
-
-        __this.widget(new Button({'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}, [
-
-        
-     ]),<__wml.Attrs>{'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}),
-__this.widget(new Button({wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click}, [
-
-        
-     ]),<__wml.Attrs>{wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click})
+        __document.createTextNode('here')
+     ]),
+__document.createTextNode(' to return to the main site.')
      ])
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
-     ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{})
+     ])
      ]);
 
        }

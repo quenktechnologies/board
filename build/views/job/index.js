@@ -1,17 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PreviewView = void 0;
+exports.JobView = void 0;
 const __document = require("@quenk/wml/lib/dom");
 //@ts-ignore: 6192
 const maybe_1 = require("@quenk/noni/lib/data/maybe");
-const button_1 = require("@quenk/wml-widgets/lib/control/button");
-;
 const grid_1 = require("@quenk/wml-widgets/lib/layout/grid");
 ;
-const alert_1 = require("@quenk/wml-widgets/lib/dialog/alert");
+const link_1 = require("@quenk/wml-widgets/lib/content/link");
 ;
-const job_1 = require("@board/widgets/lib/page/job");
+const top_bar_1 = require("@board/widgets/lib/content/top-bar");
 ;
+;
+const job_page_1 = require("@board/widgets/lib/page/job-page");
+;
+const head_1 = require("../common/head");
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];
 //@ts-ignore:6192
@@ -35,7 +37,8 @@ const text = __document.text;
 const unsafe = __document.unsafe;
 // @ts-ignore 6192
 const isSet = (value) => value != null;
-class PreviewView {
+;
+class JobView {
     constructor(__context) {
         this.ids = {};
         this.groups = {};
@@ -43,25 +46,23 @@ class PreviewView {
         this.widgets = [];
         this.tree = __document.createElement('div');
         this.template = (__this) => {
-            return __this.node('div', {}, [
-                __this.widget(new grid_1.GridLayout({}, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.widget(new alert_1.Alert({ 'text': "This is a preview, you jos has not been posted yet." }, []), { 'text': "This is a preview, you jos has not been posted yet." })
-                        ]), { 'span': 8, 'offset': 2 })
-                    ]), {})
-                ]), {}),
-                __this.widget(new job_1.JobPage({ wml: { 'id': "panel" }, 'data': __context.values.job.data }, []), { wml: { 'id': "panel" }, 'data': __context.values.job.data }),
-                __this.widget(new grid_1.GridLayout({}, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.node('div', { 'class': "action-container" }, [
-                                __this.widget(new button_1.Button({ 'className': "back-button -default -large", 'text': "Back", 'onClick': __context.values.buttons.job.click }, []), { 'className': "back-button -default -large", 'text': "Back", 'onClick': __context.values.buttons.job.click }),
-                                __this.widget(new button_1.Button({ wml: { 'id': __context.values.buttons.send.id }, 'className': "send-button -primary -large", 'text': "Post", 'onClick': __context.values.buttons.send.click }, []), { wml: { 'id': __context.values.buttons.send.id }, 'className': "send-button -primary -large", 'text': "Post", 'onClick': __context.values.buttons.send.click })
-                            ])
-                        ]), { 'span': 8, 'offset': 2 })
-                    ]), {})
-                ]), {})
+            let headCtx = {
+                'title': String(__context.job.title),
+                'meta': __context.meta
+            };
+            return __this.node('html', {}, [
+                __this.registerView(new head_1.HeadView(headCtx)).render(),
+                __this.node('body', {}, [
+                    __this.widget(new top_bar_1.TopBar({}, []), {}),
+                    __this.widget(new grid_1.GridLayout({ 'id': "main" }, [
+                        __this.widget(new grid_1.Row({}, [
+                            __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
+                                __this.widget(new link_1.Link({ 'className': "devcarib-job-page-back ww-button -default", 'href': "/jobs", 'text': "Back to Jobs" }, []), { 'className': "devcarib-job-page-back ww-button -default", 'href': "/jobs", 'text': "Back to Jobs" })
+                            ]), { 'span': 8, 'offset': 2 })
+                        ]), {})
+                    ]), { 'id': "main" }),
+                    __this.widget(new job_page_1.JobPage({ 'data': __context.job }, []), { 'data': __context.job })
+                ])
             ]);
         };
     }
@@ -126,5 +127,5 @@ class PreviewView {
         return this.tree;
     }
 }
-exports.PreviewView = PreviewView;
-//# sourceMappingURL=preview.js.map
+exports.JobView = JobView;
+//# sourceMappingURL=index.js.map

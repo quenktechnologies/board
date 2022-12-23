@@ -7,11 +7,12 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-import {Button} from '@quenk/wml-widgets/lib/control/button'; ;
 import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Alert} from '@quenk/wml-widgets/lib/dialog/alert'; ;
-import {JobPage} from '@board/widgets/lib/page/job'; ;
-import {JobFormApp} from '../'; 
+import {Link} from '@quenk/wml-widgets/lib/content/link'; ;
+import {TopBar} from '@board/widgets/lib/content/top-bar'; ;
+import {Job} from '@board/types/lib/job'; ;
+import {JobPage} from '@board/widgets/lib/page/job-page'; ;
+import {Meta,HeadView,HeadViewContext} from '../common/head'; 
 
 
 //@ts-ignore:6192
@@ -68,53 +69,47 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class PreviewView  implements __wml.View {
+export interface JobViewContext{job : Job,
+meta? : (Meta)[]};
+export class JobView  implements __wml.View {
 
-   constructor(__context: JobFormApp) {
+   constructor(__context: JobViewContext) {
 
        this.template = (__this:__wml.Registry) => {
 
-       
+       let headCtx:HeadViewContext = {
+ 
+      'title' : String(__context.job.title),
+'meta' : __context.meta
+     }
 
-           return __this.node('div', <__wml.Attrs>{}, [
+           return __this.node('html', <__wml.Attrs>{}, [
 
-        __this.widget(new GridLayout({}, [
+        __this.registerView(new HeadView(headCtx)).render(),
+__this.node('body', <__wml.Attrs>{}, [
 
-        __this.widget(new Row({}, [
-
-        __this.widget(new Column({'span': 8,'offset': 2}, [
-
-        __this.widget(new Alert({'text': "This is a preview, you jos has not been posted yet."}, [
+        __this.widget(new TopBar({}, [
 
         
-     ]),<__wml.Attrs>{'text': "This is a preview, you jos has not been posted yet."})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
-     ]),<__wml.Attrs>{})
      ]),<__wml.Attrs>{}),
-__this.widget(new JobPage({wml : { 'id' : "panel"  },'data': __context.values.job.data}, [
-
-        
-     ]),<__wml.Attrs>{wml : { 'id' : "panel"  },'data': __context.values.job.data}),
-__this.widget(new GridLayout({}, [
+__this.widget(new GridLayout({'id': "main"}, [
 
         __this.widget(new Row({}, [
 
         __this.widget(new Column({'span': 8,'offset': 2}, [
 
-        __this.node('div', <__wml.Attrs>{'class': "action-container"}, [
-
-        __this.widget(new Button({'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}, [
+        __this.widget(new Link({'className': "devcarib-job-page-back ww-button -default",'href': "/jobs",'text': "Back to Jobs"}, [
 
         
-     ]),<__wml.Attrs>{'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}),
-__this.widget(new Button({wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click}, [
-
-        
-     ]),<__wml.Attrs>{wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click})
-     ])
+     ]),<__wml.Attrs>{'className': "devcarib-job-page-back ww-button -default",'href': "/jobs",'text': "Back to Jobs"})
      ]),<__wml.Attrs>{'span': 8,'offset': 2})
      ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{'id': "main"}),
+__this.widget(new JobPage({'data': __context.job}, [
+
+        
+     ]),<__wml.Attrs>{'data': __context.job})
+     ])
      ]);
 
        }

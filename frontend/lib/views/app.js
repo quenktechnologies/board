@@ -10,7 +10,7 @@ const button_1 = require("@quenk/wml-widgets/lib/control/button");
 ;
 const link_1 = require("@quenk/wml-widgets/lib/content/link");
 ;
-const post_1 = require("@devcarib/widgets/lib/panel/job/post");
+const post_1 = require("@board/widgets/lib/panel/job/post");
 ;
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];

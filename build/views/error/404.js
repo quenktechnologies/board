@@ -1,17 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PreviewView = void 0;
+exports.NotFoundErrorView = void 0;
 const __document = require("@quenk/wml/lib/dom");
 //@ts-ignore: 6192
 const maybe_1 = require("@quenk/noni/lib/data/maybe");
-const button_1 = require("@quenk/wml-widgets/lib/control/button");
-;
-const grid_1 = require("@quenk/wml-widgets/lib/layout/grid");
-;
-const alert_1 = require("@quenk/wml-widgets/lib/dialog/alert");
-;
-const job_1 = require("@board/widgets/lib/page/job");
-;
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];
 //@ts-ignore:6192
@@ -35,7 +27,7 @@ const text = __document.text;
 const unsafe = __document.unsafe;
 // @ts-ignore 6192
 const isSet = (value) => value != null;
-class PreviewView {
+class NotFoundErrorView {
     constructor(__context) {
         this.ids = {};
         this.groups = {};
@@ -43,25 +35,23 @@ class PreviewView {
         this.widgets = [];
         this.tree = __document.createElement('div');
         this.template = (__this) => {
-            return __this.node('div', {}, [
-                __this.widget(new grid_1.GridLayout({}, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.widget(new alert_1.Alert({ 'text': "This is a preview, you jos has not been posted yet." }, []), { 'text': "This is a preview, you jos has not been posted yet." })
-                        ]), { 'span': 8, 'offset': 2 })
-                    ]), {})
-                ]), {}),
-                __this.widget(new job_1.JobPage({ wml: { 'id': "panel" }, 'data': __context.values.job.data }, []), { wml: { 'id': "panel" }, 'data': __context.values.job.data }),
-                __this.widget(new grid_1.GridLayout({}, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.node('div', { 'class': "action-container" }, [
-                                __this.widget(new button_1.Button({ 'className': "back-button -default -large", 'text': "Back", 'onClick': __context.values.buttons.job.click }, []), { 'className': "back-button -default -large", 'text': "Back", 'onClick': __context.values.buttons.job.click }),
-                                __this.widget(new button_1.Button({ wml: { 'id': __context.values.buttons.send.id }, 'className': "send-button -primary -large", 'text': "Post", 'onClick': __context.values.buttons.send.click }, []), { wml: { 'id': __context.values.buttons.send.id }, 'className': "send-button -primary -large", 'text': "Post", 'onClick': __context.values.buttons.send.click })
-                            ])
-                        ]), { 'span': 8, 'offset': 2 })
-                    ]), {})
-                ]), {})
+            return __this.node('html', { 'lang': "en" }, [
+                __this.node('head', {}, [
+                    __this.node('meta', { 'charset': "utf-8" }, []),
+                    __this.node('meta', { 'http-equiv': "X-UA-Compatible", 'content': "IE=edge" }, []),
+                    __this.node('meta', { 'name': "viewport", 'content': "width=device-width, initial-scale=1.0" }, []),
+                    __this.node('meta', { 'name': "author", 'content': "Quenk Technologies Interns" }, []),
+                    __this.node('title', {}, [
+                        __document.createTextNode(' Not Found ')
+                    ]),
+                    __this.node('link', { 'rel': "stylesheet", 'href': "/widgets.css" }, []),
+                    __this.node('link', { 'href': "/board.css", 'rel': "stylesheet" }, [])
+                ]),
+                __this.node('body', {}, [
+                    __this.node('b', {}, [
+                        __document.createTextNode('We couldn\'t find what you requested')
+                    ])
+                ])
             ]);
         };
     }
@@ -126,5 +116,5 @@ class PreviewView {
         return this.tree;
     }
 }
-exports.PreviewView = PreviewView;
-//# sourceMappingURL=preview.js.map
+exports.NotFoundErrorView = NotFoundErrorView;
+//# sourceMappingURL=404.js.map

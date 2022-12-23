@@ -10,7 +10,7 @@ from '@quenk/noni/lib/data/maybe';
 import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
 import {Button} from '@quenk/wml-widgets/lib/control/button'; ;
 import {Link} from '@quenk/wml-widgets/lib/content/link'; ;
-import {PostJobFormPanel,PostJobFormCompanyPanel} from '@devcarib/widgets/lib/panel/job/post'; ;
+import {PostJobFormPanel,PostJobFormCompanyPanel} from '@board/widgets/lib/panel/job/post'; ;
 import {JobFormApp} from '../'; 
 
 

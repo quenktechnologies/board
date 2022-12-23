@@ -7,11 +7,7 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-import {Button} from '@quenk/wml-widgets/lib/control/button'; ;
-import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Alert} from '@quenk/wml-widgets/lib/dialog/alert'; ;
-import {JobPage} from '@board/widgets/lib/page/job'; ;
-import {JobFormApp} from '../'; 
+
 
 
 //@ts-ignore:6192
@@ -68,53 +64,138 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class PreviewView  implements __wml.View {
+export interface Meta{property? : string,
+httpEquiv? : string,
+charset? : string,
+name? : string,
+content? : string};
+export interface HeadViewContext{title : string,
+noSite? : boolean,
+styles? : (string)[],
+meta? : (Meta)[]};
+export class HeadView  implements __wml.View {
 
-   constructor(__context: JobFormApp) {
+   constructor(__context: HeadViewContext) {
 
        this.template = (__this:__wml.Registry) => {
 
        
 
-           return __this.node('div', <__wml.Attrs>{}, [
+           return __this.node('head', <__wml.Attrs>{}, [
 
-        __this.widget(new GridLayout({}, [
-
-        __this.widget(new Row({}, [
-
-        __this.widget(new Column({'span': 8,'offset': 2}, [
-
-        __this.widget(new Alert({'text': "This is a preview, you jos has not been posted yet."}, [
+        __this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "57x57",'href': "/apple-icon-57x57.png"}, [
 
         
-     ]),<__wml.Attrs>{'text': "This is a preview, you jos has not been posted yet."})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
-     ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{}),
-__this.widget(new JobPage({wml : { 'id' : "panel"  },'data': __context.values.job.data}, [
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "60x60",'href': "/apple-icon-60x60.png"}, [
 
         
-     ]),<__wml.Attrs>{wml : { 'id' : "panel"  },'data': __context.values.job.data}),
-__this.widget(new GridLayout({}, [
-
-        __this.widget(new Row({}, [
-
-        __this.widget(new Column({'span': 8,'offset': 2}, [
-
-        __this.node('div', <__wml.Attrs>{'class': "action-container"}, [
-
-        __this.widget(new Button({'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}, [
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "72x72",'href': "/apple-icon-72x72.png"}, [
 
         
-     ]),<__wml.Attrs>{'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}),
-__this.widget(new Button({wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click}, [
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "76x76",'href': "/apple-icon-76x76.png"}, [
 
         
-     ]),<__wml.Attrs>{wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click})
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "114x114",'href': "/apple-icon-114x114.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "120x120",'href': "/apple-icon-120x120.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "144x144",'href': "/apple-icon-144x144.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "152x152",'href': "/apple-icon-152x152.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "apple-touch-icon",'sizes': "180x180",'href': "/apple-icon-180x180.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "icon",'type': "image/png",'sizes': "192x192",'href': "/android-icon-192x192.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "icon",'type': "image/png",'sizes': "32x32",'href': "/favicon-32x32.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "icon",'type': "image/png",'sizes': "96x96",'href': "/favicon-96x96.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "icon",'type': "image/png",'sizes': "16x16",'href': "/favicon-16x16.png"}, [
+
+        
+     ]),
+__this.node('link', <__wml.Attrs>{'rel': "manifest",'href': "/manifest.json"}, [
+
+        
+     ]),
+__this.node('meta', <__wml.Attrs>{'name': "msapplication-TileColor",'content': "#218c8d"}, [
+
+        
+     ]),
+__this.node('meta', <__wml.Attrs>{'name': "msapplication-TileImage",'content': "/ms-icon-144x144.png"}, [
+
+        
+     ]),
+__this.node('meta', <__wml.Attrs>{'name': "theme-color",'content': "#218c8d"}, [
+
+        
+     ]),
+__this.node('meta', <__wml.Attrs>{'name': "viewport",'content': unsafe ("width=device-width, initial-scale=1.0")}, [
+
+        
+     ]),
+...(((__context.meta) != null) ?
+(()=>([
+
+        ...__forIn (__context.meta, (meta , _$$i, _$$all)=> 
+([
+
+        __this.node('meta', <__wml.Attrs>{'property': meta.property,'http-equiv': meta.httpEquiv,'charset': meta.charset,'name': meta.name,'content': meta.content}, [
+
+        
      ])
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
-     ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{})
+     ]), 
+()=> ([]))
+     ]))() :
+(()=>([]))()),
+...((!(__context.noSite)) ?
+(()=>([
+
+        __this.node('link', <__wml.Attrs>{'rel': "stylesheet",'href': "/assets/css/site.css"}, [
+
+        
+     ])
+     ]))() :
+(()=>([]))()),
+...(((__context.styles) != null) ?
+(()=>([
+
+        ...__forIn (__context.styles, (style , _$$i, _$$all)=> 
+([
+
+        __this.node('link', <__wml.Attrs>{'rel': "stylesheet",'href': style}, [
+
+        
+     ])
+     ]), 
+()=> ([]))
+     ]))() :
+(()=>([]))()),
+__this.node('title', <__wml.Attrs>{}, [
+
+        text (__context.title)
+     ])
      ]);
 
        }

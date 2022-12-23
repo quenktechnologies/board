@@ -7,11 +7,9 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-import {Button} from '@quenk/wml-widgets/lib/control/button'; ;
+import {ActionBar} from '@quenk/wml-widgets/lib/layout/action-bar'; ;
 import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Alert} from '@quenk/wml-widgets/lib/dialog/alert'; ;
-import {JobPage} from '@board/widgets/lib/page/job'; ;
-import {JobFormApp} from '../'; 
+import {Link} from '@quenk/wml-widgets/lib/content/link'; 
 
 
 //@ts-ignore:6192
@@ -68,54 +66,53 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class PreviewView  implements __wml.View {
+export class HeaderView  implements __wml.View {
 
-   constructor(__context: JobFormApp) {
+   constructor(__context: object) {
 
        this.template = (__this:__wml.Registry) => {
 
        
 
-           return __this.node('div', <__wml.Attrs>{}, [
+           return __this.widget(new ActionBar({}, [
 
-        __this.widget(new GridLayout({}, [
-
-        __this.widget(new Row({}, [
-
-        __this.widget(new Column({'span': 8,'offset': 2}, [
-
-        __this.widget(new Alert({'text': "This is a preview, you jos has not been posted yet."}, [
-
-        
-     ]),<__wml.Attrs>{'text': "This is a preview, you jos has not been posted yet."})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
-     ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{}),
-__this.widget(new JobPage({wml : { 'id' : "panel"  },'data': __context.values.job.data}, [
-
-        
-     ]),<__wml.Attrs>{wml : { 'id' : "panel"  },'data': __context.values.job.data}),
-__this.widget(new GridLayout({}, [
+        __this.widget(new GridLayout({'className': "board-common-header"}, [
 
         __this.widget(new Row({}, [
 
         __this.widget(new Column({'span': 8,'offset': 2}, [
 
-        __this.node('div', <__wml.Attrs>{'class': "action-container"}, [
+        __this.widget(new Row({}, [
 
-        __this.widget(new Button({'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}, [
+        __this.widget(new Column({'span': 6}, [
+
+        __this.node('div', <__wml.Attrs>{'class': "board-logo"}, [
+
+        __this.widget(new Link({'href': "/",'text': "WeDeverse"}, [
 
         
-     ]),<__wml.Attrs>{'className': "back-button -default -large",'text': "Back",'onClick': __context.values.buttons.job.click}),
-__this.widget(new Button({wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click}, [
+     ]),<__wml.Attrs>{'href': "/",'text': "WeDeverse"}),
+__this.widget(new Link({'href': "/jobs",'text': "Jobs"}, [
 
         
-     ]),<__wml.Attrs>{wml : { 'id' : __context.values.buttons.send.id  },'className': "send-button -primary -large",'text': "Post",'onClick': __context.values.buttons.send.click})
+     ]),<__wml.Attrs>{'href': "/jobs",'text': "Jobs"})
      ])
+     ]),<__wml.Attrs>{'span': 6}),
+__this.widget(new Column({'span': 6}, [
+
+        __this.node('div', <__wml.Attrs>{'class': "board-cta-wrapper"}, [
+
+        __this.widget(new Link({'className': "ww-button -primary",'href': "/jobs/post",'text': "Post"}, [
+
+        
+     ]),<__wml.Attrs>{'className': "ww-button -primary",'href': "/jobs/post",'text': "Post"})
+     ])
+     ]),<__wml.Attrs>{'span': 6})
+     ]),<__wml.Attrs>{})
      ]),<__wml.Attrs>{'span': 8,'offset': 2})
      ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{})
-     ]);
+     ]),<__wml.Attrs>{'className': "board-common-header"})
+     ]),<__wml.Attrs>{});
 
        }
 

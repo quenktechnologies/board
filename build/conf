@@ -1,0 +1,9 @@
+app.path = "/jobs"
+
+app.dirs.public = [ "../public" ]
+
+app.modules = {
+
+  r = ./r#template
+
+}

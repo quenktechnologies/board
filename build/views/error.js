@@ -1,17 +1,14 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PreviewView = void 0;
+exports.ErrorView = void 0;
 const __document = require("@quenk/wml/lib/dom");
 //@ts-ignore: 6192
 const maybe_1 = require("@quenk/noni/lib/data/maybe");
-const button_1 = require("@quenk/wml-widgets/lib/control/button");
-;
 const grid_1 = require("@quenk/wml-widgets/lib/layout/grid");
 ;
-const alert_1 = require("@quenk/wml-widgets/lib/dialog/alert");
+const well_1 = require("@quenk/wml-widgets/lib/layout/well");
 ;
-const job_1 = require("@board/widgets/lib/page/job");
-;
+const head_1 = require("./common/head");
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];
 //@ts-ignore:6192
@@ -35,7 +32,7 @@ const text = __document.text;
 const unsafe = __document.unsafe;
 // @ts-ignore 6192
 const isSet = (value) => value != null;
-class PreviewView {
+class ErrorView {
     constructor(__context) {
         this.ids = {};
         this.groups = {};
@@ -43,25 +40,25 @@ class PreviewView {
         this.widgets = [];
         this.tree = __document.createElement('div');
         this.template = (__this) => {
-            return __this.node('div', {}, [
-                __this.widget(new grid_1.GridLayout({}, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.widget(new alert_1.Alert({ 'text': "This is a preview, you jos has not been posted yet." }, []), { 'text': "This is a preview, you jos has not been posted yet." })
-                        ]), { 'span': 8, 'offset': 2 })
+            return __this.node('html', {}, [
+                __this.registerView(new head_1.HeadView({
+                    'title': "Something went wrong"
+                })).render(),
+                __this.node('body', { 'class': "devcarib-error-page" }, [
+                    __this.widget(new grid_1.GridLayout({}, [
+                        __this.widget(new grid_1.Row({}, [
+                            __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
+                                __this.widget(new well_1.Well({ 'className': "devcarib-error-page-message" }, [
+                                    __document.createTextNode('\u000a\u000a              Your request could not be completed. This may or not be our\u000a              fault. Either way please re-try your request or click \u000a              '),
+                                    __this.node('a', { 'href': "/" }, [
+                                        __document.createTextNode('here')
+                                    ]),
+                                    __document.createTextNode(' to return to the main page.\u000a\u000a            ')
+                                ]), { 'className': "devcarib-error-page-message" })
+                            ]), { 'span': 8, 'offset': 2 })
+                        ]), {})
                     ]), {})
-                ]), {}),
-                __this.widget(new job_1.JobPage({ wml: { 'id': "panel" }, 'data': __context.values.job.data }, []), { wml: { 'id': "panel" }, 'data': __context.values.job.data }),
-                __this.widget(new grid_1.GridLayout({}, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.node('div', { 'class': "action-container" }, [
-                                __this.widget(new button_1.Button({ 'className': "back-button -default -large", 'text': "Back", 'onClick': __context.values.buttons.job.click }, []), { 'className': "back-button -default -large", 'text': "Back", 'onClick': __context.values.buttons.job.click }),
-                                __this.widget(new button_1.Button({ wml: { 'id': __context.values.buttons.send.id }, 'className': "send-button -primary -large", 'text': "Post", 'onClick': __context.values.buttons.send.click }, []), { wml: { 'id': __context.values.buttons.send.id }, 'className': "send-button -primary -large", 'text': "Post", 'onClick': __context.values.buttons.send.click })
-                            ])
-                        ]), { 'span': 8, 'offset': 2 })
-                    ]), {})
-                ]), {})
+                ])
             ]);
         };
     }
@@ -126,5 +123,5 @@ class PreviewView {
         return this.tree;
     }
 }
-exports.PreviewView = PreviewView;
-//# sourceMappingURL=preview.js.map
+exports.ErrorView = ErrorView;
+//# sourceMappingURL=error.js.map
