@@ -31,7 +31,7 @@ app.log.format = ${LOG_FORMAT}
 app.parsers.body.json.enable = true
 
 app.dirs.public = [
-  "public",
+  "../public",
   "../packages/board-widgets/public",
   "../apps/board/frontend/public"
 ]
