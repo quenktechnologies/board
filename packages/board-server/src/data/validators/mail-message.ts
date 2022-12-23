@@ -5,6 +5,7 @@
 import { MailMessage } from '@board/types/lib/mail-message';
 import * as _json from '@quenk/noni/lib/data/jsonx';
 import * as _prec from '@quenk/preconditions';
+import * as _booleanPrec from '@quenk/preconditions/lib/boolean';
 import * as _numberPrec from '@quenk/preconditions/lib/number';
 import * as _stringPrec from '@quenk/preconditions/lib/string';
 import * as _recordPrec from '@quenk/preconditions/lib/record';
