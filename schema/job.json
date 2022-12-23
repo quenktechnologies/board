@@ -8,21 +8,23 @@
 
     "imports": {
 
-        "@board/types/lib/job": ["Job"],
+        "validators:@board/types/lib/job": ["Job"],
 
-        "checks:@board/validators/lib/job": ["validate", "validatePartial"]
+        "models:@board/types/lib/job": ["Job"],
+
+        "checks:\\.\\./validators/job": ["validate", "validatePartial"]
 
     },
 
     "checks": [
         [
-            "@devcarib/server/lib/data/checks#parseMarkdown",
+            "./common#parseMarkdown",
 
             ["'description'", "'description_html'"]
 
         ],
 
-        ["@devcarib/server/lib/data/checks#inc", ["'jobs'"]]
+        ["./common#inc", ["'jobs'"]]
 
     ],
 
@@ -36,7 +38,7 @@
 
             "checks-complete": [
 
-                ["@devcarib/server/lib/data/checks#unique", ["'jobs'", "'id'"]]
+                ["./common#unique", ["'jobs'", "'id'"]]
 
             ]
 
@@ -48,9 +50,9 @@
 
             "validators": [
 
-                "@devcarib/common/lib/data/validators#textsmall",
+                "./common#textsmall",
 
-                ["@devcarib/common/lib/data/validators#minLength", [3]]
+                ["./common#minLength", [3]]
 
             ]
 
@@ -62,7 +64,7 @@
 
             "validators": [
 
-                "@devcarib/common/lib/data/validators#textsmall"
+                "./common#textsmall"
 
             ]
 
@@ -74,7 +76,7 @@
 
             "validators": [
 
-                "@devcarib/common/lib/data/validators#textsmall"
+                "./common#textsmall"
 
             ]
 
@@ -94,11 +96,11 @@
 
             "validators": [
 
-                "@devcarib/common/lib/data/validators#textlarge",
+                "./common#textlarge",
 
-                ["@devcarib/common/lib/data/validators#minLength", [3]],
+                ["./common#minLength", [3]],
 
-                ["@devcarib/common/lib/data/validators#maxLength", [6000]]
+                ["./common#maxLength", [6000]]
 
             ]
 
@@ -116,7 +118,7 @@
 
             "type": "string",
 
-            "validators": "@devcarib/common/lib/data/validators#name"
+            "validators": "./common#name"
 
         },
 
@@ -124,7 +126,7 @@
 
             "type": "string",
 
-            "validators": "@devcarib/common/lib/data/validators#email"
+            "validators": "./common#email"
 
         },
 
@@ -132,7 +134,7 @@
 
             "type": "string",
 
-            "validators": "@devcarib/common/lib/data/validators#url",
+            "validators": "./common#url",
 
             "optional": true
 
@@ -142,7 +144,7 @@
 
             "type": "string",
 
-            "validators": "@devcarib/common/lib/data/validators#url",
+            "validators": "./common#url",
 
             "optional": true
 
@@ -160,7 +162,7 @@
 
             "type": "string",
 
-            "validators": "@devcarib/common/lib/data/validators#jobStatus"
+            "validators": "./common#jobStatus"
 
         },
 

@@ -6,15 +6,13 @@
 
     "collection": "mail",
 
-    "validators:imports": {
+    "imports": {
 
-        "@board/types/lib/mail-message": "MailMessage"
+        "validators:@board/types/lib/mail-message": ["MailMessage"],
 
-    },
+        "models:@board/types/lib/mail-message": ["MailMessage"],
 
-    "checks:imports": {
-
-        "@board/validators/lib/mail-message": ["validate", "validatePartial"]
+        "checks:\\.\\./validators/mail-message": ["validate", "validatePartial"]
 
     },
 
