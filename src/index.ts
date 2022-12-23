@@ -1,6 +1,6 @@
 /* tdc-output-imports */
 import * as mongodb from 'mongodb';
-import * as jobStatus from '@devcarib/common/lib/data/job';
+import * as jobStatus from '@board/server/lib/data/job';
 
 import {
     insertOne,
@@ -14,16 +14,16 @@ import {
 } from '@quenk/tendril/lib/app/api/response';
 import { fork } from '@quenk/tendril/lib/app/api/control';
 import { checkout } from '@quenk/tendril/lib/app/api/pool';
-import { tell } from '@quenk/tendril/lib/app/api/control/actor';
+//import { tell } from '@quenk/tendril/lib/app/api/control/actor';
 import { Action, doAction } from '@quenk/tendril/lib/app/api';
 // @ts-ignore: 2300
 import { Request } from '@quenk/tendril/lib/app/api/request';
 
 import { render } from '@quenk/tendril-show-wml';
 
-import { OutgoingMessage } from '@devcarib/server/lib/actors/mail/server';
+//import { OutgoingMessage } from '@board/server/lib/actors/mail/server';
 
-import { check } from '@board/checks/lib/job';
+import { check } from '@board/server/lib/data/checks/job';
 
 import { NotFoundErrorView } from './views/error/404';
 import { PostJobFormView } from './views/job/form/post';
@@ -96,9 +96,9 @@ export class BoardController {
 
                 yield fork(insertOne(collection, data));
 
-                if (process.env.ADMIN_EMAIL)
-                    yield tell('/mail', new OutgoingMessage(process.env.ADMIN_EMAIL,
-                        'New job', 'Someone jobed *a new job* to board!'));
+                // if (process.env.ADMIN_EMAIL)
+                //   yield tell('/mail', new OutgoingMessage(process.env.ADMIN_EMAIL,
+                //     'New job', 'Someone jobed *a new job* to board!'));
 
 
 
