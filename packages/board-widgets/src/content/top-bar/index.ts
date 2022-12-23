@@ -54,17 +54,17 @@ export class TopBar extends Component<TopBarAttrs> {
 
     values = {
 
-        className: 'devcarib-TopBar',
+        className: 'board-top-bar',
 
         logo: {
 
             target: DEFAULT_TARGET,
 
-            className: 'devcarib-TopBar-logo',
+            className: 'board-top-bar-logo',
 
             image: {
 
-                className: 'devcarib-TopBar-logo-image',
+                className: 'board-top-bar-logo-image',
 
                 src: this.attrs.image || DEFAULT_IMAGE,
 
@@ -78,7 +78,7 @@ export class TopBar extends Component<TopBarAttrs> {
 
         cta: {
 
-            className: 'devcarib-TopBar-cta',
+            className: 'board-top-bar-cta',
 
             links: [{
 
