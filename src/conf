@@ -33,7 +33,7 @@ app.parsers.body.json.enable = true
 app.dirs.public = [
   "../public",
   "../packages/board-widgets/public",
-  "../apps/board/frontend/public"
+  "../frontend/public"
 ]
 
 app.middleware.available = {}
