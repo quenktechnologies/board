@@ -3,7 +3,7 @@
   property?: String, 
   httpEquiv?: String,
   charset?: String,
-  name?:String, 
+  name?: String, 
   content?: String %}
 
 {# HeadView contains the common markup for the <head> section of all

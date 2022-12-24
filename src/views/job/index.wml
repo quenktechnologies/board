@@ -30,7 +30,7 @@
           <Column span=8 offset=2>
             <Link
               className="devcarib-job-page-back ww-button -default"
-              href="/jobs"
+              href="/"
               text="Back to Jobs"/>
           </Column>
         </Row>

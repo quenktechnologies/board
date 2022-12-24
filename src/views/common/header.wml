@@ -14,7 +14,7 @@
                 href="/"
                 text="WeDeverse"/>
               <Link
-                href="/jobs"
+                href="/"
                 text="Jobs"/>
             </div>
           </Column>
@@ -22,7 +22,7 @@
             <div class="board-cta-wrapper">
               <Link
                 className="ww-button -primary"
-                href="/jobs/post"
+                href="/post"
                 text="Post" />
             </div>
           </Column>
