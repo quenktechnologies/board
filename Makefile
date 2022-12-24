@@ -31,11 +31,14 @@ BOARD_DIR:=$(HERE)
 BOARD_SCHEMA_DIR:=$(HERE)/schema
 BOARD_PACKAGES_DIR:=$(HERE)/packages
 BOARD_BUILD_DIR:=$(HERE)/build
+BOARD_FRONTEND_DIR:=$(BOARD_DIR)/frontend
+BOARD_PUBLIC_DIR:=$(BOARD_DIR)/public
 JS_VARS:=$(HERE)/node_modules/@quenk/wml-widgets/lib/classNames.js
 CLEAN_TARGETS:=$(BOARD_BUILD_DIR)
 
 include $(BOARD_SCHEMA_DIR)/variables.mk
 include $(BOARD_PACKAGES_DIR)/*/variables.mk
+include $(BOARD_FRONTEND_DIR)/variables.mk
 
 ### Dependency Graph ###
 
@@ -43,7 +46,9 @@ include $(BOARD_PACKAGES_DIR)/*/variables.mk
 
 $(BOARD_BUILD_DIR): $(shell find $(BOARD_DIR)/src -type f) \
                     $(shell find $(BOARD_PACKAGES_DIR) -mindepth 1 \
-                    -maxdepth 1 -type d)
+                    -maxdepth 1 -type d) \
+                    $(BOARD_FRONTEND_DIR) \
+                    $(BOARD_PUBLIC_DIR)
 	rm -R $@ || true
 	mkdir -p $@
 	cp -R -u $(BOARD_DIR)/src/* $@
@@ -54,6 +59,24 @@ $(BOARD_BUILD_DIR): $(shell find $(BOARD_DIR)/src -type f) \
 
 include $(BOARD_SCHEMA_DIR)/build.mk
 include $(BOARD_PACKAGES_DIR)/*/build.mk
+include $(BOARD_FRONTEND_DIR)/build.mk
+
+$(BOARD_PUBLIC_DIR): $(BOARD_PUBLIC_DIR)/assets/css/board.css
+	touch $@
+
+$(BOARD_PUBLIC_DIR)/assets/css/board.css: $(BOARD_DIR)/imports.less \
+                   $(BOARD_DIR)/main.less \
+                   $(BOARD_WIDGETS_DIR)
+	mkdir -p $(dir $@)
+	rm -R $@ || true
+	$(LESSC) --source-map-less-inline \
+	--js-vars=$(JS_VARS) $(BOARD_DIR)/main.less \
+	| ./node_modules/.bin/cleancss > $@
+
+$(BOARD_DIR)/imports.less: $(shell find $(BOARD_DIR)/src -name \*.less)
+	echo "" > $@
+	$(foreach f,$(subst $(BOARD_DIR)/,,$^),\
+	echo '@import "./$(f)";' >> $@ && ) true
 
 # Remove the build application files.
 .PHONY: clean
