@@ -1,14 +1,12 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.HeaderView = void 0;
+exports.PostJobFormView = void 0;
 const __document = require("@quenk/wml/lib/dom");
 //@ts-ignore: 6192
 const maybe_1 = require("@quenk/noni/lib/data/maybe");
-const action_bar_1 = require("@quenk/wml-widgets/lib/layout/action-bar");
+const top_bar_1 = require("@board/widgets/lib/content/top-bar");
 ;
-const grid_1 = require("@quenk/wml-widgets/lib/layout/grid");
-;
-const link_1 = require("@quenk/wml-widgets/lib/content/link");
+const head_1 = require("./common/head");
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];
 //@ts-ignore:6192
@@ -32,7 +30,7 @@ const text = __document.text;
 const unsafe = __document.unsafe;
 // @ts-ignore 6192
 const isSet = (value) => value != null;
-class HeaderView {
+class PostJobFormView {
     constructor(__context) {
         this.ids = {};
         this.groups = {};
@@ -40,27 +38,26 @@ class HeaderView {
         this.widgets = [];
         this.tree = __document.createElement('div');
         this.template = (__this) => {
-            return __this.widget(new action_bar_1.ActionBar({}, [
-                __this.widget(new grid_1.GridLayout({ 'className': "board-common-header" }, [
-                    __this.widget(new grid_1.Row({}, [
-                        __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
-                            __this.widget(new grid_1.Row({}, [
-                                __this.widget(new grid_1.Column({ 'span': 6 }, [
-                                    __this.node('div', { 'class': "board-logo" }, [
-                                        __this.widget(new link_1.Link({ 'href': "/", 'text': "WeDeverse" }, []), { 'href': "/", 'text': "WeDeverse" }),
-                                        __this.widget(new link_1.Link({ 'href': "/jobs", 'text': "Jobs" }, []), { 'href': "/jobs", 'text': "Jobs" })
-                                    ])
-                                ]), { 'span': 6 }),
-                                __this.widget(new grid_1.Column({ 'span': 6 }, [
-                                    __this.node('div', { 'class': "board-cta-wrapper" }, [
-                                        __this.widget(new link_1.Link({ 'className': "ww-button -primary", 'href': "/jobs/post", 'text': "Post" }, []), { 'className': "ww-button -primary", 'href': "/jobs/post", 'text': "Post" })
-                                    ])
-                                ]), { 'span': 6 })
-                            ]), {})
-                        ]), { 'span': 8, 'offset': 2 })
-                    ]), {})
-                ]), { 'className': "board-common-header" })
-            ]), {});
+            return __this.node('html', {}, [
+                __this.registerView(new head_1.HeadView({
+                    'title': "Post a Job",
+                    'noSite': true,
+                    'styles': [
+                        "/assets/css/board-frontend.css"
+                    ]
+                })).render(),
+                __this.node('body', {}, [
+                    __this.widget(new top_bar_1.TopBar({}, []), {}),
+                    __this.node('main', {}, [
+                        __this.node('noscript', {}, [
+                            __this.node('b', {}, [
+                                __document.createTextNode('JavaScript must be enabled to use this form.')
+                            ])
+                        ])
+                    ]),
+                    __this.node('script', { 'src': "/assets/js/board.js" }, [])
+                ])
+            ]);
         };
     }
     registerView(v) {
@@ -124,5 +121,5 @@ class HeaderView {
         return this.tree;
     }
 }
-exports.HeaderView = HeaderView;
-//# sourceMappingURL=header.js.map
+exports.PostJobFormView = PostJobFormView;
+//# sourceMappingURL=post.js.map

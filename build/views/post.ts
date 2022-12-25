@@ -7,7 +7,8 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-
+import {TopBar} from '@board/widgets/lib/content/top-bar'; ;
+import {HeadView} from './common/head'; 
 
 
 //@ts-ignore:6192
@@ -64,7 +65,7 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class NotFoundErrorView  implements __wml.View {
+export class PostJobFormView  implements __wml.View {
 
    constructor(__context: object) {
 
@@ -72,44 +73,36 @@ export class NotFoundErrorView  implements __wml.View {
 
        
 
-           return __this.node('html', <__wml.Attrs>{'lang': "en"}, [
+           return __this.node('html', <__wml.Attrs>{}, [
 
-        __this.node('head', <__wml.Attrs>{}, [
+        __this.registerView(new HeadView({
+ 
+      'title' : "Post a Job",
+'noSite' : true ,
+'styles' : [
 
-        __this.node('meta', <__wml.Attrs>{'charset': "utf-8"}, [
-
-        
-     ]),
-__this.node('meta', <__wml.Attrs>{'http-equiv': "X-UA-Compatible",'content': "IE=edge"}, [
-
-        
-     ]),
-__this.node('meta', <__wml.Attrs>{'name': "viewport",'content': "width=device-width, initial-scale=1.0"}, [
-
-        
-     ]),
-__this.node('meta', <__wml.Attrs>{'name': "author",'content': "Quenk Technologies Interns"}, [
-
-        
-     ]),
-__this.node('title', <__wml.Attrs>{}, [
-
-        __document.createTextNode(' Not Found ')
-     ]),
-__this.node('link', <__wml.Attrs>{'rel': "stylesheet",'href': "/widgets.css"}, [
-
-        
-     ]),
-__this.node('link', <__wml.Attrs>{'href': "/board.css",'rel': "stylesheet"}, [
-
-        
-     ])
-     ]),
+            "/assets/css/board-frontend.css"
+            ]
+     })).render(),
 __this.node('body', <__wml.Attrs>{}, [
+
+        __this.widget(new TopBar({}, [
+
+        
+     ]),<__wml.Attrs>{}),
+__this.node('main', <__wml.Attrs>{}, [
+
+        __this.node('noscript', <__wml.Attrs>{}, [
 
         __this.node('b', <__wml.Attrs>{}, [
 
-        __document.createTextNode('We couldn\'t find what you requested')
+        __document.createTextNode('JavaScript must be enabled to use this form.')
+     ])
+     ])
+     ]),
+__this.node('script', <__wml.Attrs>{'src': "/assets/js/board.js"}, [
+
+        
      ])
      ])
      ]);

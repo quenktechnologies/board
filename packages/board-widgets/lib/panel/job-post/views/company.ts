@@ -7,9 +7,10 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
-import {ActionBar} from '@quenk/wml-widgets/lib/layout/action-bar'; ;
+import {Panel,PanelBody} from '@quenk/wml-widgets/lib/layout/panel'; ;
 import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Link} from '@quenk/wml-widgets/lib/content/link'; 
+import {TextField} from '@quenk/wml-widgets/lib/control/text-field'; ;
+import {PostJobFormCompanyPanel} from '../'; 
 
 
 //@ts-ignore:6192
@@ -66,52 +67,52 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class HeaderView  implements __wml.View {
+export class PostJobFormCompanyPanelView  implements __wml.View {
 
-   constructor(__context: object) {
+   constructor(__context: PostJobFormCompanyPanel) {
 
        this.template = (__this:__wml.Registry) => {
 
        
 
-           return __this.widget(new ActionBar({}, [
+           return __this.widget(new Panel({}, [
 
-        __this.widget(new GridLayout({'className': "board-common-header"}, [
+        __this.widget(new PanelBody({}, [
 
-        __this.widget(new Row({}, [
-
-        __this.widget(new Column({'span': 8,'offset': 2}, [
+        __this.widget(new GridLayout({}, [
 
         __this.widget(new Row({}, [
 
-        __this.widget(new Column({'span': 6}, [
+        __this.widget(new Column({}, [
 
-        __this.node('div', <__wml.Attrs>{'class': "board-logo"}, [
-
-        __this.widget(new Link({'href': "/",'text': "WeDeverse"}, [
+        __this.widget(new TextField({wml : { 'id' : "company"  },'name': "company",'label': "Company Name*",'value': __context.attrs.data.company,'onChange': __context.attrs.onChange}, [
 
         
-     ]),<__wml.Attrs>{'href': "/",'text': "WeDeverse"}),
-__this.widget(new Link({'href': "/jobs",'text': "Jobs"}, [
-
-        
-     ]),<__wml.Attrs>{'href': "/jobs",'text': "Jobs"})
-     ])
-     ]),<__wml.Attrs>{'span': 6}),
-__this.widget(new Column({'span': 6}, [
-
-        __this.node('div', <__wml.Attrs>{'class': "board-cta-wrapper"}, [
-
-        __this.widget(new Link({'className': "ww-button -primary",'href': "/jobs/post",'text': "Post"}, [
-
-        
-     ]),<__wml.Attrs>{'className': "ww-button -primary",'href': "/jobs/post",'text': "Post"})
-     ])
-     ]),<__wml.Attrs>{'span': 6})
+     ]),<__wml.Attrs>{wml : { 'id' : "company"  },'name': "company",'label': "Company Name*",'value': __context.attrs.data.company,'onChange': __context.attrs.onChange})
      ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
+     ]),<__wml.Attrs>{}),
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        __this.widget(new TextField({wml : { 'id' : "company_logo"  },'name': "company_logo",'label': "Logo",'placeholder': "Provide an image at least 500 pixels wide",'value': __context.attrs.data.company_logo,'onChange': __context.attrs.onChange}, [
+
+        
+     ]),<__wml.Attrs>{wml : { 'id' : "company_logo"  },'name': "company_logo",'label': "Logo",'placeholder': "Provide an image at least 500 pixels wide",'value': __context.attrs.data.company_logo,'onChange': __context.attrs.onChange})
      ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{'className': "board-common-header"})
+     ]),<__wml.Attrs>{}),
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        __this.widget(new TextField({wml : { 'id' : "company_email"  },'name': "company_email",'label': "Email*",'placeholder': "Used in case we need to contact you only",'value': __context.attrs.data.company_email,'onChange': __context.attrs.onChange}, [
+
+        
+     ]),<__wml.Attrs>{wml : { 'id' : "company_email"  },'name': "company_email",'label': "Email*",'placeholder': "Used in case we need to contact you only",'value': __context.attrs.data.company_email,'onChange': __context.attrs.onChange})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
      ]),<__wml.Attrs>{});
 
        }

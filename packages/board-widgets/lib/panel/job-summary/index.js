@@ -4,7 +4,7 @@ exports.JobSummaryPanel = void 0;
 const wml_1 = require("@quenk/wml");
 const string_1 = require("@quenk/noni/lib/data/string");
 const views_1 = require("./views");
-const DEFAULT_URL = '/jobs/{id}';
+const DEFAULT_URL = '/{id}';
 /**
  * JobSummaryPanel is used to display details of a job posting usually in a list.
  */

@@ -1,7 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.template = exports.board = exports.BoardController = exports.ERROR_AUTH_FAILED = void 0;
+const quenkTendrilConnectionMongodb = require("@quenk/tendril-connection-mongodb");
+const quenkTendrilSessionMongodb = require("@quenk/tendril-session-mongodb");
+const quenkTendrilShowNunjucks = require("@quenk/tendril-show-nunjucks");
 const dotR = require("./r");
+const dotEvents = require("./events");
 //@ts-ignore: 6133
 const module_1 = require("@quenk/tendril/lib/app/module");
 const jobStatus = require("@board/server/lib/data/job");
@@ -14,8 +18,8 @@ const api_1 = require("@quenk/tendril/lib/app/api");
 const tendril_show_wml_1 = require("@quenk/tendril-show-wml");
 //import { OutgoingMessage } from '@board/server/lib/actors/mail/server';
 const job_1 = require("@board/server/lib/data/checks/job");
-const _404_1 = require("./views/error/404");
-const post_1 = require("./views/job/form/post");
+const _404_1 = require("./views/404");
+const post_1 = require("./views/post");
 const job_2 = require("./views/job");
 const views_1 = require("./views");
 exports.ERROR_AUTH_FAILED = 'Invalid Email or password! Try again.';
@@ -79,7 +83,7 @@ class BoardController {
             let qry = { id, status: jobStatus.JOB_STATUS_ACTIVE };
             let mResult = yield (0, control_1.fork)((0, collection_1.findOne)(collection, qry));
             if (mResult.isNothing()) {
-                return (0, tendril_show_wml_1.render)(new _404_1.NotFoundErrorView({}), 404);
+                return (0, tendril_show_wml_1.render)(new _404_1.NotFoundView({}), 404);
             }
             else {
                 let job = mResult.get();
@@ -106,11 +110,25 @@ exports.BoardController = BoardController;
 const getMain = () => (0, pool_1.checkout)('main');
 exports.board = new BoardController();
 //@ts-ignore: 6133
-const template = ($app) => ({ 'id': `build`,
+const template = ($app) => ({ 'id': `/`,
     'app': { 'dirs': { 'self': `/build`,
-            'public': [`../public`] },
-        'path': `/jobs`,
+            'public': [`../public`, `../packages/board-widgets/public`, `../frontend/public`] },
+        'session': { 'enable': true,
+            'options': { 'secret': process.env['SESSION_SECRET'],
+                'name': `sessid` },
+            'store': { 'provider': quenkTendrilSessionMongodb.provider,
+                'options': { 'uri': process.env['MONGO_URL'] } } },
+        'csrf': { 'token': { 'enable': true,
+                'send_cookie': true } },
+        'views': { 'provider': quenkTendrilShowNunjucks.show },
+        'log': { 'enable': true,
+            'format': process.env['LOG_FORMAT'] },
+        'parsers': { 'body': { 'json': { 'enable': true } } },
+        'middleware': { 'available': {},
+            'enabled': [] },
         'modules': { 'r': dotR.template },
+        'on': { 'connected': [dotEvents.connected],
+            'started': dotEvents.started },
         'routes': //@ts-ignore: 6133
         ($module) => {
             let $routes = [];
@@ -138,6 +156,10 @@ const template = ($app) => ({ 'id': `build`,
         } },
     'create': 
     //@ts-ignore: 6133 
-    (s) => new module_1.Module(s) });
+    (s) => new module_1.Module(s),
+    'server': { 'port': process.env['PORT'],
+        'host': `0.0.0.0` },
+    'connections': { 'main': { 'connector': quenkTendrilConnectionMongodb.connector,
+            'options': [process.env['MONGO_URL'], { 'useNewUrlParser': true }] } } });
 exports.template = template;
 //# sourceMappingURL=index.js.map

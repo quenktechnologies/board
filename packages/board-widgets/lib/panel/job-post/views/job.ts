@@ -8,11 +8,11 @@ fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
 import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
-import {Link} from '@quenk/wml-widgets/lib/content/link'; ;
-import {TopBar} from '@board/widgets/lib/content/top-bar'; ;
-import {Job} from '@board/types/lib/job'; ;
-import {JobPage} from '@board/widgets/lib/page/job-page'; ;
-import {Meta,HeadView,HeadViewContext} from '../common/head'; 
+import {Panel,PanelBody} from '@quenk/wml-widgets/lib/layout/panel'; ;
+import {TextField} from '@quenk/wml-widgets/lib/control/text-field'; ;
+import {DropList} from '@quenk/wml-widgets/lib/control/drop-list'; ;
+import {Checkbox} from '@quenk/wml-widgets/lib/control/checkbox'; ;
+import {PostJobFormPanel} from '../'; 
 
 
 //@ts-ignore:6192
@@ -69,48 +69,88 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export interface JobViewContext{job : Job,
-meta? : (Meta)[]};
-export class JobView  implements __wml.View {
+export class PostJobFormPanelView  implements __wml.View {
 
-   constructor(__context: JobViewContext) {
+   constructor(__context: PostJobFormPanel) {
 
        this.template = (__this:__wml.Registry) => {
 
-       let headCtx:HeadViewContext = {
- 
-      'title' : String(__context.job.title),
-'meta' : __context.meta
-     }
+       
 
-           return __this.node('html', <__wml.Attrs>{}, [
+           return __this.widget(new Panel({}, [
 
-        __this.registerView(new HeadView(headCtx)).render(),
-__this.node('body', <__wml.Attrs>{}, [
+        __this.widget(new PanelBody({}, [
 
-        __this.widget(new TopBar({}, [
-
-        
-     ]),<__wml.Attrs>{}),
-__this.widget(new GridLayout({'id': "main"}, [
+        __this.widget(new GridLayout({}, [
 
         __this.widget(new Row({}, [
 
-        __this.widget(new Column({'span': 8,'offset': 2}, [
+        __this.widget(new Column({}, [
 
-        __this.widget(new Link({'className': "devcarib-job-page-back ww-button -default",'href': "/jobs",'text': "Back to Jobs"}, [
+        __this.widget(new TextField({wml : { 'id' : "title"  },'name': "title",'label': "Title*",'placeholder': "Senior Software Engineer",'value': __context.attrs.data.title,'onChange': __context.attrs.onChange}, [
 
         
-     ]),<__wml.Attrs>{'className': "devcarib-job-page-back ww-button -default",'href': "/jobs",'text': "Back to Jobs"})
-     ]),<__wml.Attrs>{'span': 8,'offset': 2})
+     ]),<__wml.Attrs>{wml : { 'id' : "title"  },'name': "title",'label': "Title*",'placeholder': "Senior Software Engineer",'value': __context.attrs.data.title,'onChange': __context.attrs.onChange})
      ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{'id': "main"}),
-__this.widget(new JobPage({'data': __context.job}, [
+     ]),<__wml.Attrs>{}),
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({'span': 6}, [
+
+        __this.widget(new TextField({wml : { 'id' : "location"  },'name': "location",'label': "Location (where the job is based)*",'value': __context.attrs.data.location,'onChange': __context.attrs.onChange}, [
 
         
-     ]),<__wml.Attrs>{'data': __context.job})
+     ]),<__wml.Attrs>{wml : { 'id' : "location"  },'name': "location",'label': "Location (where the job is based)*",'value': __context.attrs.data.location,'onChange': __context.attrs.onChange})
+     ]),<__wml.Attrs>{'span': 6}),
+__this.widget(new Column({'span': 6}, [
+
+        __this.node('label', <__wml.Attrs>{'class': "ww-label"}, [
+
+        __document.createTextNode('Select A Job Type*')
+     ]),
+__this.widget(new DropList({wml : { 'id' : "type"  },'className': "board-job-type-dropdown -block",'name': "type",'value': __context.attrs.data.type,'options': __context.typeOptions,'onSelect': __context.attrs.onChange}, [
+
+        
+     ]),<__wml.Attrs>{wml : { 'id' : "type"  },'className': "board-job-type-dropdown -block",'name': "type",'value': __context.attrs.data.type,'options': __context.typeOptions,'onSelect': __context.attrs.onChange})
+     ]),<__wml.Attrs>{'span': 6})
+     ]),<__wml.Attrs>{}),
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        __this.widget(new TextField({wml : { 'id' : "apply_url"  },'name': "apply_url",'label': "Apply Link",'placeholder': "Specify a url or email address applicants can use to apply",'value': __context.attrs.data.apply_url,'onChange': __context.attrs.onChange}, [
+
+        
+     ]),<__wml.Attrs>{wml : { 'id' : "apply_url"  },'name': "apply_url",'label': "Apply Link",'placeholder': "Specify a url or email address applicants can use to apply",'value': __context.attrs.data.apply_url,'onChange': __context.attrs.onChange})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{}),
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        __this.node('b', <__wml.Attrs>{}, [
+
+        __this.widget(new Checkbox({'name': "remote",'value': __context.attrs.data.remote,'onChange': __context.attrs.onChange}, [
+
+        
+     ]),<__wml.Attrs>{'name': "remote",'value': __context.attrs.data.remote,'onChange': __context.attrs.onChange}),
+__document.createTextNode('\u000a             This job is remote \u000a          ')
      ])
-     ]);
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{}),
+__this.widget(new Row({}, [
+
+        __this.widget(new Column({}, [
+
+        __this.widget(new TextField({wml : { 'id' : "description"  },'name': "description",'placeholder': "Provide full details of the job. Markdown is supported",'rows': 12,'value': __context.attrs.data.description,'onChange': __context.attrs.onChange}, [
+
+        
+     ]),<__wml.Attrs>{wml : { 'id' : "description"  },'name': "description",'placeholder': "Provide full details of the job. Markdown is supported",'rows': 12,'value': __context.attrs.data.description,'onChange': __context.attrs.onChange})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{});
 
        }
 

@@ -3,7 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.timefromnow = exports.timestamp = void 0;
 const moment = require("moment");
 /**
- * timestamp displays a date in the follwing format: "January 30th 2021".
+ * timestamp displays a date in the following format: "January 30th 2021".
  */
 const timestamp = (str) => {
     let stamp = moment(str);

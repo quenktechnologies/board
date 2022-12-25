@@ -1,9 +1,19 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.NotFoundErrorView = void 0;
+exports.JobView = void 0;
 const __document = require("@quenk/wml/lib/dom");
 //@ts-ignore: 6192
 const maybe_1 = require("@quenk/noni/lib/data/maybe");
+const grid_1 = require("@quenk/wml-widgets/lib/layout/grid");
+;
+const link_1 = require("@quenk/wml-widgets/lib/content/link");
+;
+const top_bar_1 = require("@board/widgets/lib/content/top-bar");
+;
+;
+const job_page_1 = require("@board/widgets/lib/page/job-page");
+;
+const head_1 = require("./common/head");
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];
 //@ts-ignore:6192
@@ -27,7 +37,8 @@ const text = __document.text;
 const unsafe = __document.unsafe;
 // @ts-ignore 6192
 const isSet = (value) => value != null;
-class NotFoundErrorView {
+;
+class JobView {
     constructor(__context) {
         this.ids = {};
         this.groups = {};
@@ -35,22 +46,26 @@ class NotFoundErrorView {
         this.widgets = [];
         this.tree = __document.createElement('div');
         this.template = (__this) => {
-            return __this.node('html', { 'lang': "en" }, [
-                __this.node('head', {}, [
-                    __this.node('meta', { 'charset': "utf-8" }, []),
-                    __this.node('meta', { 'http-equiv': "X-UA-Compatible", 'content': "IE=edge" }, []),
-                    __this.node('meta', { 'name': "viewport", 'content': "width=device-width, initial-scale=1.0" }, []),
-                    __this.node('meta', { 'name': "author", 'content': "Quenk Technologies Interns" }, []),
-                    __this.node('title', {}, [
-                        __document.createTextNode(' Not Found ')
-                    ]),
-                    __this.node('link', { 'rel': "stylesheet", 'href': "/widgets.css" }, []),
-                    __this.node('link', { 'href': "/board.css", 'rel': "stylesheet" }, [])
-                ]),
+            let headCtx = {
+                'title': String(__context.job.title),
+                'noSite': true,
+                'styles': [
+                    "/assets/css/board.css"
+                ],
+                'meta': __context.meta
+            };
+            return __this.node('html', {}, [
+                __this.registerView(new head_1.HeadView(headCtx)).render(),
                 __this.node('body', {}, [
-                    __this.node('b', {}, [
-                        __document.createTextNode('We couldn\'t find what you requested')
-                    ])
+                    __this.widget(new top_bar_1.TopBar({}, []), {}),
+                    __this.widget(new grid_1.GridLayout({ 'id': "main" }, [
+                        __this.widget(new grid_1.Row({}, [
+                            __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
+                                __this.widget(new link_1.Link({ 'className': "devcarib-job-page-back ww-button -default", 'href': "/", 'text': "Back to Jobs" }, []), { 'className': "devcarib-job-page-back ww-button -default", 'href': "/", 'text': "Back to Jobs" })
+                            ]), { 'span': 8, 'offset': 2 })
+                        ]), {})
+                    ]), { 'id': "main" }),
+                    __this.widget(new job_page_1.JobPage({ 'data': __context.job }, []), { 'data': __context.job })
                 ])
             ]);
         };
@@ -116,5 +131,5 @@ class NotFoundErrorView {
         return this.tree;
     }
 }
-exports.NotFoundErrorView = NotFoundErrorView;
-//# sourceMappingURL=404.js.map
+exports.JobView = JobView;
+//# sourceMappingURL=job.js.map

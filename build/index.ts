@@ -1,4 +1,8 @@
+import * as quenkTendrilConnectionMongodb from '@quenk/tendril-connection-mongodb'; 
+import * as quenkTendrilSessionMongodb from '@quenk/tendril-session-mongodb'; 
+import * as quenkTendrilShowNunjucks from '@quenk/tendril-show-nunjucks'; 
 import * as dotR from './r'; 
+import * as dotEvents from './events'; 
 //@ts-ignore: 6133
 import {System} from '@quenk/potoo/lib/actor/system';
 //@ts-ignore: 6133
@@ -41,8 +45,8 @@ import { render } from '@quenk/tendril-show-wml';
 
 import { check } from '@board/server/lib/data/checks/job';
 
-import { NotFoundErrorView } from './views/error/404';
-import { PostJobFormView } from './views/job/form/post';
+import { NotFoundView } from './views/404';
+import { PostJobFormView } from './views/post';
 import { JobView } from './views/job';
 import { IndexView } from './views';
 
@@ -148,7 +152,7 @@ export class BoardController {
             let mResult = yield fork(findOne(collection, qry));
 
             if (mResult.isNothing()) {
-                return render(new NotFoundErrorView({}), 404);
+                return render(new NotFoundView({}), 404);
             } else {
 
                 let job = mResult.get();
@@ -182,11 +186,25 @@ const getMain = (): Action<mongodb.Db> => checkout('main');
 export const board = new BoardController();
 //@ts-ignore: 6133
 export const template = ($app: App): Template => (
- {'id': `build`,
+ {'id': `/`,
 'app': {'dirs': {'self': `/build`,
-'public': [`../public`]},
-'path': `/jobs`,
+'public': [`../public`,`../packages/board-widgets/public`,`../frontend/public`]},
+'session': {'enable': true,
+'options': {'secret': (<string>process.env['SESSION_SECRET']),
+'name': `sessid`},
+'store': {'provider': quenkTendrilSessionMongodb.provider,
+'options': {'uri': (<string>process.env['MONGO_URL'])}}},
+'csrf': {'token': {'enable': true,
+'send_cookie': true}},
+'views': {'provider': quenkTendrilShowNunjucks.show},
+'log': {'enable': true,
+'format': (<string>process.env['LOG_FORMAT'])},
+'parsers': {'body': {'json': {'enable': true}}},
+'middleware': {'available': {},
+'enabled': []},
 'modules': {'r': dotR.template},
+'on': {'connected': [dotEvents.connected],
+'started': dotEvents.started},
 'routes': //@ts-ignore: 6133
 ($module:Module) => {
 
@@ -215,4 +233,8 @@ return $routes;
 }},
 'create': 
 //@ts-ignore: 6133 
-(s:System) => new Module(<App>s)})
+(s:System) => new Module(<App>s),
+'server': {'port': (<string>process.env['PORT']),
+'host': `0.0.0.0`},
+'connections': {'main': {'connector': quenkTendrilConnectionMongodb.connector,
+'options': [(<string>process.env['MONGO_URL']),{'useNewUrlParser': true}]}}})

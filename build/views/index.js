@@ -61,29 +61,18 @@ class IndexView {
                             __this.widget(new grid_1.Column({ 'span': 8, 'offset': 2 }, [
                                 __this.widget(new grid_1.Row({}, [
                                     __this.widget(new grid_1.Column({}, [
-                                        __this.node('p', { 'class': "board-post-job-prompt" }, [
-                                            __document.createTextNode('Need talent for a project? \u000a                  '),
-                                            __this.widget(new link_1.Link({ 'className': "ww-button -error", 'href': "/jobs/post", 'text': "Post a Job" }, []), { 'className': "ww-button -error", 'href': "/jobs/post", 'text': "Post a Job" })
-                                        ])
-                                    ]), {})
-                                ]), {}),
-                                __this.widget(new grid_1.Row({}, [
-                                    __this.widget(new grid_1.Column({}, [
                                         ...__forIn(__context.jobs, (job, _$$i, _$$all) => ([
                                             __this.widget(new job_summary_1.JobSummaryPanel({ 'job': job }, []), { 'job': job })
                                         ]), () => ([
                                             __this.node('div', { 'class': "board-no-jobs" }, [
                                                 __this.node('img', { 'src': "/assets/img/sad.svg", 'alt': "Sad Face" }, []),
                                                 __this.node('h1', {}, [
-                                                    unsafe("Sorry, This Job Board Is Empty!")
+                                                    unsafe("Sorry!")
                                                 ]),
                                                 __this.node('p', {}, [
-                                                    __document.createTextNode('Jobs posted by recruiters will show up here so check back in a few days.')
+                                                    __document.createTextNode('There are currently no jobs on this board. Hiring?')
                                                 ]),
-                                                __this.node('p', {}, [
-                                                    __document.createTextNode('Looking for developers?')
-                                                ]),
-                                                __this.widget(new link_1.Link({ 'className': "ww-button -primary", 'text': "Post a Job", 'href': "/jobs/post" }, []), { 'className': "ww-button -primary", 'text': "Post a Job", 'href': "/jobs/post" })
+                                                __this.widget(new link_1.Link({ 'className': "ww-button -primary", 'text': "Post a Job", 'href': "/post" }, []), { 'className': "ww-button -primary", 'text': "Post a Job", 'href': "/post" })
                                             ])
                                         ]))
                                     ]), {})

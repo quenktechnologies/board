@@ -105,20 +105,6 @@ __this.widget(new GridLayout({'id': "main"}, [
 
         __this.widget(new Column({}, [
 
-        __this.node('p', <__wml.Attrs>{'class': "board-post-job-prompt"}, [
-
-        __document.createTextNode('Need talent for a project? \u000a                  '),
-__this.widget(new Link({'className': "ww-button -error",'href': "/jobs/post",'text': "Post a Job"}, [
-
-        
-     ]),<__wml.Attrs>{'className': "ww-button -error",'href': "/jobs/post",'text': "Post a Job"})
-     ])
-     ]),<__wml.Attrs>{})
-     ]),<__wml.Attrs>{}),
-__this.widget(new Row({}, [
-
-        __this.widget(new Column({}, [
-
         ...__forIn (__context.jobs, (job , _$$i, _$$all)=> 
 ([
 
@@ -137,20 +123,16 @@ __this.widget(new Row({}, [
      ]),
 __this.node('h1', <__wml.Attrs>{}, [
 
-        unsafe ("Sorry, This Job Board Is Empty!")
+        unsafe ("Sorry!")
      ]),
 __this.node('p', <__wml.Attrs>{}, [
 
-        __document.createTextNode('Jobs posted by recruiters will show up here so check back in a few days.')
+        __document.createTextNode('There are currently no jobs on this board. Hiring?')
      ]),
-__this.node('p', <__wml.Attrs>{}, [
-
-        __document.createTextNode('Looking for developers?')
-     ]),
-__this.widget(new Link({'className': "ww-button -primary",'text': "Post a Job",'href': "/jobs/post"}, [
+__this.widget(new Link({'className': "ww-button -primary",'text': "Post a Job",'href': "/post"}, [
 
         
-     ]),<__wml.Attrs>{'className': "ww-button -primary",'text': "Post a Job",'href': "/jobs/post"})
+     ]),<__wml.Attrs>{'className': "ww-button -primary",'text': "Post a Job",'href': "/post"})
      ])
      ]))
      ]),<__wml.Attrs>{})

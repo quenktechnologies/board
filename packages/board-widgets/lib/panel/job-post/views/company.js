@@ -1,12 +1,15 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.PostJobFormView = void 0;
+exports.PostJobFormCompanyPanelView = void 0;
 const __document = require("@quenk/wml/lib/dom");
 //@ts-ignore: 6192
 const maybe_1 = require("@quenk/noni/lib/data/maybe");
-const top_bar_1 = require("@board/widgets/lib/content/top-bar");
+const panel_1 = require("@quenk/wml-widgets/lib/layout/panel");
 ;
-const head_1 = require("../../common/head");
+const grid_1 = require("@quenk/wml-widgets/lib/layout/grid");
+;
+const text_field_1 = require("@quenk/wml-widgets/lib/control/text-field");
+;
 //@ts-ignore:6192
 const __if = (__expr, __conseq, __alt) => (__expr) ? __conseq() : __alt ? __alt() : [];
 //@ts-ignore:6192
@@ -30,7 +33,7 @@ const text = __document.text;
 const unsafe = __document.unsafe;
 // @ts-ignore 6192
 const isSet = (value) => value != null;
-class PostJobFormView {
+class PostJobFormCompanyPanelView {
     constructor(__context) {
         this.ids = {};
         this.groups = {};
@@ -38,25 +41,27 @@ class PostJobFormView {
         this.widgets = [];
         this.tree = __document.createElement('div');
         this.template = (__this) => {
-            return __this.node('html', {}, [
-                __this.registerView(new head_1.HeadView({
-                    'title': "Post a Job",
-                    'styles': [
-                        "/assets/css/board-frontend.css"
-                    ]
-                })).render(),
-                __this.node('body', {}, [
-                    __this.widget(new top_bar_1.TopBar({}, []), {}),
-                    __this.node('main', {}, [
-                        __this.node('noscript', {}, [
-                            __this.node('b', {}, [
-                                __document.createTextNode('JavaScript must be enabled to use this form.')
-                            ])
-                        ])
-                    ]),
-                    __this.node('script', { 'src': "/assets/js/board.js" }, [])
-                ])
-            ]);
+            return __this.widget(new panel_1.Panel({}, [
+                __this.widget(new panel_1.PanelBody({}, [
+                    __this.widget(new grid_1.GridLayout({}, [
+                        __this.widget(new grid_1.Row({}, [
+                            __this.widget(new grid_1.Column({}, [
+                                __this.widget(new text_field_1.TextField({ wml: { 'id': "company" }, 'name': "company", 'label': "Company Name*", 'value': __context.attrs.data.company, 'onChange': __context.attrs.onChange }, []), { wml: { 'id': "company" }, 'name': "company", 'label': "Company Name*", 'value': __context.attrs.data.company, 'onChange': __context.attrs.onChange })
+                            ]), {})
+                        ]), {}),
+                        __this.widget(new grid_1.Row({}, [
+                            __this.widget(new grid_1.Column({}, [
+                                __this.widget(new text_field_1.TextField({ wml: { 'id': "company_logo" }, 'name': "company_logo", 'label': "Logo", 'placeholder': "Provide an image at least 500 pixels wide", 'value': __context.attrs.data.company_logo, 'onChange': __context.attrs.onChange }, []), { wml: { 'id': "company_logo" }, 'name': "company_logo", 'label': "Logo", 'placeholder': "Provide an image at least 500 pixels wide", 'value': __context.attrs.data.company_logo, 'onChange': __context.attrs.onChange })
+                            ]), {})
+                        ]), {}),
+                        __this.widget(new grid_1.Row({}, [
+                            __this.widget(new grid_1.Column({}, [
+                                __this.widget(new text_field_1.TextField({ wml: { 'id': "company_email" }, 'name': "company_email", 'label': "Email*", 'placeholder': "Used in case we need to contact you only", 'value': __context.attrs.data.company_email, 'onChange': __context.attrs.onChange }, []), { wml: { 'id': "company_email" }, 'name': "company_email", 'label': "Email*", 'placeholder': "Used in case we need to contact you only", 'value': __context.attrs.data.company_email, 'onChange': __context.attrs.onChange })
+                            ]), {})
+                        ]), {})
+                    ]), {})
+                ]), {})
+            ]), {});
         };
     }
     registerView(v) {
@@ -120,5 +125,5 @@ class PostJobFormView {
         return this.tree;
     }
 }
-exports.PostJobFormView = PostJobFormView;
-//# sourceMappingURL=post.js.map
+exports.PostJobFormCompanyPanelView = PostJobFormCompanyPanelView;
+//# sourceMappingURL=company.js.map

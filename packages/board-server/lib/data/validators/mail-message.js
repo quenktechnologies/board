@@ -5,6 +5,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.validatePartial = exports.validate = exports.partialFieldValidators = exports.fieldValidators = void 0;
 const _prec = require("@quenk/preconditions");
+const _booleanPrec = require("@quenk/preconditions/lib/boolean");
 const _numberPrec = require("@quenk/preconditions/lib/number");
 const _stringPrec = require("@quenk/preconditions/lib/string");
 const _recordPrec = require("@quenk/preconditions/lib/record");

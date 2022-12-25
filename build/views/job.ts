@@ -7,8 +7,12 @@ fromNullable as __fromNullable,
 fromArray as __fromArray
 }
 from '@quenk/noni/lib/data/maybe';
+import {GridLayout,Row,Column} from '@quenk/wml-widgets/lib/layout/grid'; ;
+import {Link} from '@quenk/wml-widgets/lib/content/link'; ;
 import {TopBar} from '@board/widgets/lib/content/top-bar'; ;
-import {HeadView} from '../../common/head'; 
+import {Job} from '@board/types/lib/job'; ;
+import {JobPage} from '@board/widgets/lib/page/job-page'; ;
+import {Meta,HeadView,HeadViewContext} from './common/head'; 
 
 
 //@ts-ignore:6192
@@ -65,44 +69,51 @@ const text = __document.text;
 const unsafe = __document.unsafe
 // @ts-ignore 6192
 const isSet = (value:any) => value != null
-export class PostJobFormView  implements __wml.View {
+export interface JobViewContext{job : Job,
+meta? : (Meta)[]};
+export class JobView  implements __wml.View {
 
-   constructor(__context: object) {
+   constructor(__context: JobViewContext) {
 
        this.template = (__this:__wml.Registry) => {
 
-       
+       let headCtx:HeadViewContext = {
+ 
+      'title' : String(__context.job.title),
+'noSite' : true ,
+'styles' : [
+
+            "/assets/css/board.css"
+            ],
+'meta' : __context.meta
+     }
 
            return __this.node('html', <__wml.Attrs>{}, [
 
-        __this.registerView(new HeadView({
- 
-      'title' : "Post a Job",
-'styles' : [
-
-            "/assets/css/board-frontend.css"
-            ]
-     })).render(),
+        __this.registerView(new HeadView(headCtx)).render(),
 __this.node('body', <__wml.Attrs>{}, [
 
         __this.widget(new TopBar({}, [
 
         
      ]),<__wml.Attrs>{}),
-__this.node('main', <__wml.Attrs>{}, [
+__this.widget(new GridLayout({'id': "main"}, [
 
-        __this.node('noscript', <__wml.Attrs>{}, [
+        __this.widget(new Row({}, [
 
-        __this.node('b', <__wml.Attrs>{}, [
+        __this.widget(new Column({'span': 8,'offset': 2}, [
 
-        __document.createTextNode('JavaScript must be enabled to use this form.')
-     ])
-     ])
-     ]),
-__this.node('script', <__wml.Attrs>{'src': "/assets/js/board.js"}, [
+        __this.widget(new Link({'className': "devcarib-job-page-back ww-button -default",'href': "/",'text': "Back to Jobs"}, [
 
         
-     ])
+     ]),<__wml.Attrs>{'className': "devcarib-job-page-back ww-button -default",'href': "/",'text': "Back to Jobs"})
+     ]),<__wml.Attrs>{'span': 8,'offset': 2})
+     ]),<__wml.Attrs>{})
+     ]),<__wml.Attrs>{'id': "main"}),
+__this.widget(new JobPage({'data': __context.job}, [
+
+        
+     ]),<__wml.Attrs>{'data': __context.job})
      ])
      ]);
 

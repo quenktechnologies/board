@@ -1,6 +1,6 @@
 {% import (TopBar) from "@board/widgets/lib/content/top-bar" %}
 
-{% import (HeadView) from "../../common/head" %}
+{% import (HeadView) from "./common/head" %}
 
 {# PostJobFormView is the view for the "new job" form page. #}
 {% view PostJobFormView (Object) %}
@@ -8,6 +8,7 @@
   {{
     <HeadView({
                 title = "Post a Job",
+                noSite = true,
                 styles = ["/assets/css/board-frontend.css"]
               })>
   }}

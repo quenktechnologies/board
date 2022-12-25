@@ -19,23 +19,23 @@ class TopBar extends wml_1.Component {
         super(...arguments);
         this.view = new views_1.TopBarView(this);
         this.values = {
-            className: 'devcarib-TopBar',
+            className: 'board-top-bar',
             logo: {
                 target: DEFAULT_TARGET,
-                className: 'devcarib-TopBar-logo',
+                className: 'board-top-bar-logo',
                 image: {
-                    className: 'devcarib-TopBar-logo-image',
+                    className: 'board-top-bar-logo-image',
                     src: this.attrs.image || DEFAULT_IMAGE,
                     alt: 'Logo'
                 }
             },
             links: this.attrs.links,
             cta: {
-                className: 'devcarib-TopBar-cta',
+                className: 'board-top-bar-cta',
                 links: [{
                         className: 'ww-button -primary',
-                        href: '/login',
-                        text: 'Log in'
+                        href: '/post',
+                        text: 'Post Job'
                     }]
             }
         };
