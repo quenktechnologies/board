@@ -25,8 +25,8 @@ import { render } from '@quenk/tendril-show-wml';
 
 import { check } from '@board/server/lib/data/checks/job';
 
-import { NotFoundErrorView } from './views/error/404';
-import { PostJobFormView } from './views/job/form/post';
+import { NotFoundView } from './views/404';
+import { PostJobFormView } from './views/post';
 import { JobView } from './views/job';
 import { IndexView } from './views';
 
@@ -132,7 +132,7 @@ export class BoardController {
             let mResult = yield fork(findOne(collection, qry));
 
             if (mResult.isNothing()) {
-                return render(new NotFoundErrorView({}), 404);
+                return render(new NotFoundView({}), 404);
             } else {
 
                 let job = mResult.get();

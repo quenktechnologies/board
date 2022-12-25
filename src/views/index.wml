@@ -26,23 +26,13 @@
         <Column span=8 offset=2>
           <Row>
             <Column>
-              <p class="board-post-job-prompt">Need talent for a project? 
-                <Link className="ww-button -error"
-                      href="/post" 
-                      text="Post a Job"/>
-              </p>
-            </Column>
-          </Row>
-          <Row>
-            <Column>
               {% for job in @jobs %}
                 <JobSummaryPanel job={{job}} />
               {% else %}
                 <div class="board-no-jobs">
                   <img src="/assets/img/sad.svg" alt="Sad Face"/>
-                  <h1>{{"Sorry, This Job Board Is Empty!" | unsafe }}</h1>
-                  <p>Jobs posted by recruiters will show up here so check back in a few days.</p>
-                  <p>Looking for developers?</p>
+                  <h1>{{"Sorry!" | unsafe }}</h1>
+                  <p>There are currently no jobs on this board. Hiring?</p>
                   <Link
                     className="ww-button -primary"
                     text="Post a Job"
