@@ -13,14 +13,12 @@
 {% view JobView where job: Job, meta?: Meta[] %}
 
   {% let headCtx:HeadViewContext = { 
-
       title = String(@job.title),
-
+      noSite = true,
+      styles = ["/assets/css/board.css"],
       meta =  @meta
-
     }
   %}
-
   <html>
     {{ <HeadView(headCtx)> }}
     <body>
