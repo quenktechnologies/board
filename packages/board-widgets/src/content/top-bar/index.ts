@@ -84,9 +84,9 @@ export class TopBar extends Component<TopBarAttrs> {
 
                 className: 'ww-button -primary',
 
-                href: '/login',
+                href: '/post',
 
-                text: 'Log in'
+                text: 'Post Job'
 
             }]
 
