@@ -9,7 +9,7 @@ import { Job } from '@board/types/lib/job';
 
 import { JobSummaryPanelView } from './views';
 
-const DEFAULT_URL = '/jobs/{id}';
+const DEFAULT_URL = '/{id}';
 
 /**
  * JobSummaryPanelAttrs
